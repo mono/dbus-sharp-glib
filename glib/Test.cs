@@ -12,12 +12,10 @@ public class TestGLib
 {
 	public static void OnClick (object o, EventArgs args)
 	{
-		Console.WriteLine ("click");
-
-		Console.WriteLine ();
-		foreach (string n in bus.ListNames ())
-			//Console.WriteLine (n);
-			tv.Buffer.Text += n+'\n';
+		foreach (string n in bus.ListNames ()) {
+			TextIter endIter = tv.Buffer.EndIter;
+			tv.Buffer.Insert (ref endIter, n + '\n');
+		}
 	}
 
 	static TextView tv;
