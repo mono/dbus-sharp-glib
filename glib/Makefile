@@ -8,20 +8,20 @@ VPATH=$(DBUS_SHARP_PREFIX)/src
 
 #.PHONY: all
 
-all: NDesk.DBus.GLib.dll test-glib
+all: NDesk.DBus.GLib.dll test
 
 
 NDesk.DBus.GLib.dll: PKGS = glib-sharp-2.0
 
 NDesk.DBus.GLib.dll: NDesk.DBus.dll GIO.cs GLib.cs
 
-test-glib.exe: PKGS = gtk-sharp-2.0
+test.exe: PKGS = gtk-sharp-2.0
 
-test-glib.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll TestGlib.cs
+test.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll Test.cs
 
 #%: %.exe
 
-test-glib: test-glib.exe
+test: test.exe
 	echo '#!/bin/sh' > $@
 	echo 'MONO_PATH=$(DBUS_SHARP_PREFIX)/src:$$MONO_PATH' >> $@
 	echo '$(RUNTIME) $^ $$@' >> $@

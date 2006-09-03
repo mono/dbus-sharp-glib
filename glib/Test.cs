@@ -8,7 +8,7 @@ using Gtk;
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-public class TestGlib
+public class TestGLib
 {
 	public static void OnClick (object o, EventArgs args)
 	{
