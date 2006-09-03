@@ -4,18 +4,27 @@ DBUS_SHARP_PREFIX=../../dbus-sharp
 VPATH=$(DBUS_SHARP_PREFIX)/src
 
 #Note that this makefile isn't healthy, but it works for me
+#Makefile bug: doesn't seem to work with make -B
 
-.PHONY: all
+#.PHONY: all
 
-all: test-glib
+all: NDesk.DBus.GLib.dll test-glib
+
+
+NDesk.DBus.GLib.dll: PKGS = glib-sharp-2.0
+
+NDesk.DBus.GLib.dll: NDesk.DBus.dll GIO.cs
 
 test-glib.exe: PKGS = gtk-sharp-2.0
 
-test-glib.exe: NDesk.DBus.dll GIO.cs TestGlib.cs
+test-glib.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll TestGlib.cs
 
-%: %.exe
-	echo 'MONO_PATH=$(DBUS_SHARP_PREFIX)/src:$$MONO_PATH' > $@
-	echo 'mono --debug $^' >> $@
+#%: %.exe
+
+test-glib: test-glib.exe
+	echo '#!/bin/sh' > $@
+	echo 'MONO_PATH=$(DBUS_SHARP_PREFIX)/src:$$MONO_PATH' >> $@
+	echo '$(RUNTIME) $^ $$@' >> $@
 	chmod +x $@
 
 include $(DBUS_SHARP_PREFIX)/include.mk
