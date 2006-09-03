@@ -13,7 +13,7 @@ all: NDesk.DBus.GLib.dll test-glib
 
 NDesk.DBus.GLib.dll: PKGS = glib-sharp-2.0
 
-NDesk.DBus.GLib.dll: NDesk.DBus.dll GIO.cs
+NDesk.DBus.GLib.dll: NDesk.DBus.dll GIO.cs GLib.cs
 
 test-glib.exe: PKGS = gtk-sharp-2.0
 

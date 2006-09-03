@@ -10,15 +10,6 @@ using org.freedesktop.DBus;
 
 public class TestGlib
 {
-	public static bool Dispatch (IOChannel source, IOCondition condition, IntPtr data)
-	{
-		Console.WriteLine ("Dispatch " + source.UnixFd + " " + condition);
-		conn.Iterate ();
-		Console.WriteLine ("Dispatch done");
-
-		return true;
-	}
-
 	public static void OnClick (object o, EventArgs args)
 	{
 		Console.WriteLine ("click");
@@ -31,14 +22,13 @@ public class TestGlib
 
 	static TextView tv;
 
-	static Connection conn;
 	static Bus bus;
 
 	public static void Main ()
 	{
-		Application.Init ();
+		DApplication.Init ();
 
-		conn = new Connection ();
+		Application.Init ();
 
 		tv = new TextView ();
 		ScrolledWindow sw = new ScrolledWindow ();
@@ -61,16 +51,15 @@ public class TestGlib
 		ObjectPath opath = new ObjectPath ("/org/freedesktop/DBus");
 		string name = "org.freedesktop.DBus";
 
-		bus = conn.GetObject<Bus> (name, opath);
+		bus = DApplication.Connection.GetObject<Bus> (name, opath);
 
 		bus.NameAcquired += delegate (string acquired_name) {
-			Console.WriteLine ("NameAcquired: " + acquired_name);
+			Console.Error.WriteLine ("NameAcquired: " + acquired_name);
 		};
 
 		string myName = bus.Hello ();
-		Console.WriteLine ("myName: " + myName);
+		Console.Error.WriteLine ("myName: " + myName);
 
-		IO.AddWatch ((int)conn.sock.Handle, Dispatch);
 
 		Application.Run ();
 	}

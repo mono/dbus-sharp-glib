@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace GLib
+namespace NDesk.GLib
 {
 	public delegate bool IOFunc (IOChannel source, IOCondition condition, IntPtr data);
 
