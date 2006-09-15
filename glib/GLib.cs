@@ -11,13 +11,14 @@ using org.freedesktop.DBus;
 
 namespace NDesk.DBus
 {
+	//FIXME: this API needs review and de-unixification
 	public static class DApplication
 	{
 		public static bool Dispatch (IOChannel source, IOCondition condition, IntPtr data)
 		{
-			Console.Error.WriteLine ("Dispatch " + source.UnixFd + " " + condition);
+			//Console.Error.WriteLine ("Dispatch " + source.UnixFd + " " + condition);
 			connection.Iterate ();
-			Console.Error.WriteLine ("Dispatch done");
+			//Console.Error.WriteLine ("Dispatch done");
 
 			return true;
 		}
