@@ -50,6 +50,7 @@ public class TestGLib
 		string myName = bus.Hello ();
 		Console.Error.WriteLine ("myName: " + myName);
 
+		ObjectPath myOpath = new ObjectPath ("/org/ndesk/test");
 		string myNameReq = "org.ndesk.gtest";
 
 		if (bus.NameHasOwner (myNameReq)) {
@@ -60,7 +61,7 @@ public class TestGLib
 			Console.WriteLine ("nameReply: " + nameReply);
 
 			demo = new DemoObject ();
-			DApplication.Connection.Marshal (demo, "org.ndesk.gtest");
+			DApplication.Connection.Marshal (demo, myNameReq, opath);
 		}
 
 		Application.Run ();
