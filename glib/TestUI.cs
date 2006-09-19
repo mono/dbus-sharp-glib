@@ -65,7 +65,6 @@ public class TestGLib
 
 			Console.WriteLine ("nameReply: " + nameReply);
 
-			Connection.tmpConn = DApplication.Connection;
 			DApplication.Connection.Marshal (btn, myNameReq, new ObjectPath ("/org/ndesk/btn"));
 			rbtn = btn;
 		}
