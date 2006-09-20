@@ -102,12 +102,12 @@ namespace NDesk.GLib
 		//TODO: better memory management
 		public static ArrayList objs = new ArrayList ();
 
-		public static void AddWatch (int fd, IOFunc func)
+		public static uint AddWatch (int fd, IOFunc func)
 		{
 			objs.Add (func);
 
 			IOChannel channel = new IOChannel (fd);
-			uint watch = g_io_add_watch (channel, IOCondition.In, func, IntPtr.Zero);
+			return g_io_add_watch (channel, IOCondition.In, func, IntPtr.Zero);
 		}
 	}
 
