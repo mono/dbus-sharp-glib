@@ -38,14 +38,14 @@ namespace NDesk.GLib
 		[DllImport(GLIB)]
 			static extern IntPtr g_io_channel_unix_new (int fd);
 
-		[DllImport(GLIB)]
-			//static extern int g_io_channel_unix_get_fd (IntPtr channel);
-			static extern int g_io_channel_unix_get_fd (IOChannel channel);
-
 		public IOChannel (int fd)
 		{
 			Handle = g_io_channel_unix_new (fd);
 		}
+
+		[DllImport(GLIB)]
+			//static extern int g_io_channel_unix_get_fd (IntPtr channel);
+			static extern int g_io_channel_unix_get_fd (IOChannel channel);
 
 		public int UnixFd
 		{
@@ -56,7 +56,16 @@ namespace NDesk.GLib
 		}
 
 		[DllImport(GLIB)]
-			static extern IOFlags g_io_channel_get_flags (IOChannel channel);
+			public static extern IntPtr g_io_channel_win32_new_fd (int fd);
+
+		[DllImport(GLIB)]
+			public static extern IntPtr g_io_channel_win32_new_socket (int socket);
+
+		[DllImport(GLIB)]
+			public static extern IntPtr g_io_channel_win32_new_messages (uint hwnd);
+
+		[DllImport(GLIB)]
+			public static extern IOFlags g_io_channel_get_flags (IOChannel channel);
 
 		[DllImport(GLIB)]
 			static extern short g_io_channel_set_flags (IOChannel channel, IOFlags flags, IntPtr error);
