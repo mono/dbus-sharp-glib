@@ -8,7 +8,12 @@ using System.Runtime.InteropServices;
 
 namespace NDesk.GLib
 {
-	//delegate void DestroyNotify (IntPtr data);
+	/*
+	Specifies the type of function which is called when a data element is destroyed. It is passed the pointer to the data element and should free any memory and resources allocated for it.
+
+	@data: the data element.
+	*/
+	public delegate void DestroyNotify (IntPtr data);
 
 	/*
 	Specifies the type of function passed to g_io_add_watch() or g_io_add_watch_full(), which is called when the requested condition on a GIOChannel is satisfied.
@@ -71,6 +76,9 @@ namespace NDesk.GLib
 	{
 		const string GLIB = "glib-2.0";
 
+		//TODO: better memory management
+		public static ArrayList objs = new ArrayList ();
+
 		/*
 		Adds the GIOChannel into the main event loop with the default priority.
 
@@ -83,6 +91,15 @@ namespace NDesk.GLib
 		*/
 		[DllImport(GLIB)]
 			protected static extern uint g_io_add_watch (IOChannel channel, IOCondition condition, IOFunc func, IntPtr user_data);
+
+		public static uint AddWatch (int fd, IOCondition condition, IOFunc func)
+		{
+			IOChannel channel = new IOChannel (fd);
+
+			objs.Add (func);
+
+			return g_io_add_watch (channel, condition, func, IntPtr.Zero);
+		}
 
 		/*
 		Adds the GIOChannel into the main event loop with the given priority.
@@ -97,17 +114,16 @@ namespace NDesk.GLib
 		Returns: the event source id.
 		*/
 		[DllImport(GLIB)]
-			protected static extern uint g_io_add_watch_full (IOChannel channel, int priority, IOCondition condition, IOFunc func, IntPtr user_data, IntPtr notify);
+			protected static extern uint g_io_add_watch_full (IOChannel channel, int priority, IOCondition condition, IOFunc func, IntPtr user_data, DestroyNotify notify);
 
-		//TODO: better memory management
-		public static ArrayList objs = new ArrayList ();
-
-		public static uint AddWatch (int fd, IOFunc func)
+		public static uint AddWatch (int fd, int priority, IOCondition condition, IOFunc func, DestroyNotify notify)
 		{
-			objs.Add (func);
-
 			IOChannel channel = new IOChannel (fd);
-			return g_io_add_watch (channel, IOCondition.In, func, IntPtr.Zero);
+
+			objs.Add (func);
+			objs.Add (notify);
+
+			return g_io_add_watch_full (channel, priority, condition, func, IntPtr.Zero, notify);
 		}
 	}
 
