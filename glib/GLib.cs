@@ -14,7 +14,7 @@ namespace NDesk.DBus
 	//FIXME: this API needs review and de-unixification
 	public static class DApplication
 	{
-		public static bool Dispatch (IOChannel source, IOCondition condition, IntPtr data)
+		static bool Dispatch (IOChannel source, IOCondition condition, IntPtr data)
 		{
 			//Console.Error.WriteLine ("Dispatch " + source.UnixFd + " " + condition);
 			connection.Iterate ();
@@ -23,14 +23,18 @@ namespace NDesk.DBus
 			return true;
 		}
 
-		static Connection connection;
+		static Connection connection = null;
 		public static Connection Connection
 		{
 			get {
+				if (connection == null)
+					Init ();
+
 				return connection;
 			}
 		}
 
+		[Obsolete]
 		public static void Init ()
 		{
 			connection = new Connection ();

@@ -24,8 +24,6 @@ public class TestGLib
 
 	public static void Main ()
 	{
-		DApplication.Init ();
-
 		Application.Init ();
 
 		tv = new TextView ();

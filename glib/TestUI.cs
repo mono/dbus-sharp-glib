@@ -26,8 +26,6 @@ public class TestGLib
 
 	public static void Main ()
 	{
-		DApplication.Init ();
-
 		Application.Init ();
 
 		btn = new Button ("Click me");
