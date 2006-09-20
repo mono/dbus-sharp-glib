@@ -51,7 +51,8 @@ namespace NDesk.DBus
 			Console.Error.WriteLine ("myName: " + myName);
 			*/
 
-			IO.AddWatch ((int)connection.sock.Handle, IOCondition.In, Dispatch);
+			IOChannel channel = new IOChannel ((int)connection.sock.Handle);
+			IO.AddWatch (channel, IOCondition.In, Dispatch);
 		}
 	}
 }

@@ -92,10 +92,8 @@ namespace NDesk.GLib
 		[DllImport(GLIB)]
 			protected static extern uint g_io_add_watch (IOChannel channel, IOCondition condition, IOFunc func, IntPtr user_data);
 
-		public static uint AddWatch (int fd, IOCondition condition, IOFunc func)
+		public static uint AddWatch (IOChannel channel, IOCondition condition, IOFunc func)
 		{
-			IOChannel channel = new IOChannel (fd);
-
 			objs.Add (func);
 
 			return g_io_add_watch (channel, condition, func, IntPtr.Zero);
@@ -116,10 +114,8 @@ namespace NDesk.GLib
 		[DllImport(GLIB)]
 			protected static extern uint g_io_add_watch_full (IOChannel channel, int priority, IOCondition condition, IOFunc func, IntPtr user_data, DestroyNotify notify);
 
-		public static uint AddWatch (int fd, int priority, IOCondition condition, IOFunc func, DestroyNotify notify)
+		public static uint AddWatch (IOChannel channel, int priority, IOCondition condition, IOFunc func, DestroyNotify notify)
 		{
-			IOChannel channel = new IOChannel (fd);
-
 			objs.Add (func);
 			objs.Add (notify);
 
@@ -143,13 +139,20 @@ namespace NDesk.GLib
 		POLLWRBAND  = 0x0200, // Priority data may be written
 	}
 
+	//A bitwise combination representing a condition to watch for on an event source.
 	public enum IOCondition : short
 	{
+		//There is data to read.
 		In = PollEvents.POLLIN,
+		//Data can be written (without blocking).
 		Out = PollEvents.POLLOUT,
+		//There is urgent data to read.
 		Pri = PollEvents.POLLPRI,
+		//Error condition.
 		Err = PollEvents.POLLERR,
+		//Hung up (the connection has been broken, usually for pipes and sockets).
 		Hup = PollEvents.POLLHUP,
+		//Invalid request. The file descriptor is not open.
 		Nval = PollEvents.POLLNVAL,
 	}
 
