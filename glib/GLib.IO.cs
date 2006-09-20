@@ -64,6 +64,32 @@ namespace NDesk.GLib
 		[DllImport(GLIB)]
 			public static extern IntPtr g_io_channel_win32_new_messages (uint hwnd);
 
+
+		[DllImport(GLIB)]
+			public static extern uint g_io_channel_get_buffer_size (IOChannel channel);
+
+		[DllImport(GLIB)]
+			public static extern void g_io_channel_set_buffer_size (IOChannel channel, uint size);
+
+		public uint BufferSize
+		{
+			get {
+				return g_io_channel_get_buffer_size (this);
+			} set {
+				g_io_channel_set_buffer_size (this, value);
+			}
+		}
+
+		[DllImport(GLIB)]
+			public static extern IOCondition g_io_channel_get_buffer_condition (IOChannel channel);
+
+		public IOCondition BufferCondition
+		{
+			get {
+				return g_io_channel_get_buffer_condition (this);
+			}
+		}
+
 		[DllImport(GLIB)]
 			public static extern IOFlags g_io_channel_get_flags (IOChannel channel);
 
