@@ -59,7 +59,7 @@ public class TestGLib
 			Console.WriteLine ("nameReply: " + nameReply);
 
 			demo = new DemoObject ();
-			DApplication.Connection.Marshal (demo, myNameReq, opath);
+			DApplication.Connection.Marshal (demo, myNameReq, myOpath);
 		}
 
 		Application.Run ();
