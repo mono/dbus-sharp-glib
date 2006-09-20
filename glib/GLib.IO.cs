@@ -8,12 +8,24 @@ using System.Runtime.InteropServices;
 
 namespace NDesk.GLib
 {
+	//delegate void DestroyNotify (IntPtr data);
+
+	/*
+	Specifies the type of function passed to g_io_add_watch() or g_io_add_watch_full(), which is called when the requested condition on a GIOChannel is satisfied.
+
+	@source: the GIOChannel event source.
+	@condition: the condition which has been satisfied.
+	@data: user data set in g_io_add_watch() or g_io_add_watch_full().
+
+	Returns: the function should return FALSE if the event source should be removed.
+	*/
 	public delegate bool IOFunc (IOChannel source, IOCondition condition, IntPtr data);
 
 	//this is actually somewhat like Stream, but we don't use it that way
 	[StructLayout (LayoutKind.Sequential)]
 	public struct IOChannel
 	{
+		//TODO: dllmap entry
 		const string GLIB = "glib-2.0";
 
 		public IntPtr Handle;
@@ -59,16 +71,35 @@ namespace NDesk.GLib
 	{
 		const string GLIB = "glib-2.0";
 
-		[DllImport(GLIB)]
-			protected static extern uint g_io_add_watch (IntPtr channel, IOCondition condition, IOFunc func, IntPtr user_data);
+		/*
+		Adds the GIOChannel into the main event loop with the default priority.
 
+		@channel: a GIOChannel.
+		@condition: the condition to watch for.
+		@func: the function to call when the condition is satisfied.
+		@user_data: user data to pass to func.
+
+		Returns: the event source id.
+		*/
 		[DllImport(GLIB)]
 			protected static extern uint g_io_add_watch (IOChannel channel, IOCondition condition, IOFunc func, IntPtr user_data);
 
+		/*
+		Adds the GIOChannel into the main event loop with the given priority.
+
+		@channel: a GIOChannel.
+		@priority: the priority of the GIOChannel source.
+		@condition: the condition to watch for.
+		@func: the function to call when the condition is satisfied.
+		@user_data: user data to pass to func.
+		@notify: the function to call when the source is removed.
+
+		Returns: the event source id.
+		*/
 		[DllImport(GLIB)]
 			protected static extern uint g_io_add_watch_full (IOChannel channel, int priority, IOCondition condition, IOFunc func, IntPtr user_data, IntPtr notify);
 
-
+		//TODO: better memory management
 		public static ArrayList objs = new ArrayList ();
 
 		public static void AddWatch (int fd, IOFunc func)
@@ -78,8 +109,8 @@ namespace NDesk.GLib
 			IOChannel channel = new IOChannel (fd);
 			uint watch = g_io_add_watch (channel, IOCondition.In, func, IntPtr.Zero);
 		}
-
 	}
+
 	//From Mono.Unix and poll(2)
 	[Flags]
 	enum PollEvents : short {
