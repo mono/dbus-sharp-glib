@@ -23,6 +23,7 @@ namespace NDesk.DBus
 			return true;
 		}
 
+		static Connection connection;
 		public static Connection Connection
 		{
 			get {
@@ -30,26 +31,9 @@ namespace NDesk.DBus
 			}
 		}
 
-		static Connection connection;
-		static Bus bus;
-
 		public static void Init ()
 		{
 			connection = new Connection ();
-
-			//ObjectPath opath = new ObjectPath ("/org/freedesktop/DBus");
-			//string name = "org.freedesktop.DBus";
-
-			/*
-			bus = connection.GetObject<Bus> (name, opath);
-
-			bus.NameAcquired += delegate (string acquired_name) {
-				Console.Error.WriteLine ("NameAcquired: " + acquired_name);
-			};
-
-			string myName = bus.Hello ();
-			Console.Error.WriteLine ("myName: " + myName);
-			*/
 
 			IOChannel channel = new IOChannel ((int)connection.sock.Handle);
 			IO.AddWatch (channel, IOCondition.In, Dispatch);
