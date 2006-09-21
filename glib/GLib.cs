@@ -34,6 +34,20 @@ namespace NDesk.DBus
 			}
 		}
 
+		//this will need to change later, but is needed for now
+		static Bus sessionBus = null;
+		public static Bus SessionBus
+		{
+			get {
+				if (sessionBus == null) {
+					sessionBus = Connection.GetObject<Bus>("org.freedesktop.DBus", new ObjectPath("/org/freedesktop/DBus"));
+					sessionBus.Hello ();
+				}
+
+				return sessionBus;
+			}
+		}
+
 		[Obsolete]
 		public static void Init ()
 		{
