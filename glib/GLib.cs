@@ -53,7 +53,7 @@ namespace NDesk.DBus
 		{
 			connection = new Connection ();
 
-			IOChannel channel = new IOChannel ((int)connection.sock.Handle);
+			IOChannel channel = new IOChannel ((int)connection.SocketHandle);
 			IO.AddWatch (channel, IOCondition.In, Dispatch);
 		}
 	}
