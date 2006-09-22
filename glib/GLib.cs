@@ -48,8 +48,8 @@ namespace NDesk.DBus
 			}
 		}
 
-		[Obsolete]
-		public static void Init ()
+		//this is just temporary
+		private static void Init ()
 		{
 			connection = new Connection ();
 
