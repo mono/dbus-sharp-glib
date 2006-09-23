@@ -19,7 +19,7 @@ public class TestGLib
 	{
 		Application.Init ();
 
-		Window win = new Window ("DBus#");
+		Window win = new Window ("D-Bus#");
 		win.SetDefaultSize (640, 480);
 		win.Destroyed += delegate {Application.Quit ();};
 		win.ShowAll ();

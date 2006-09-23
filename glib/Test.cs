@@ -37,7 +37,7 @@ public class TestGLib
 		vb.PackStart (sw, true, true, 0);
 		vb.PackStart (btn, false, true, 0);
 
-		Window win = new Window ("DBus#");
+		Window win = new Window ("D-Bus#");
 		win.SetDefaultSize (640, 480);
 		win.Add (vb);
 		win.Destroyed += delegate {Application.Quit ();};

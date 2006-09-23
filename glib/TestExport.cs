@@ -29,7 +29,7 @@ public class TestGLib
 		VBox vb = new VBox (false, 2);
 		vb.PackStart (btn, false, true, 0);
 
-		Window win = new Window ("DBus#");
+		Window win = new Window ("D-Bus#");
 		win.SetDefaultSize (640, 480);
 		win.Add (vb);
 		win.Destroyed += delegate {Application.Quit ();};
