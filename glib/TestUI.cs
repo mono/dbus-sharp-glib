@@ -40,30 +40,19 @@ public class TestGLib
 		win.Destroyed += delegate {Application.Quit ();};
 		win.ShowAll ();
 
+		bus = DApplication.SessionBus;
 
-		ObjectPath opath = new ObjectPath ("/org/freedesktop/DBus");
-		string name = "org.freedesktop.DBus";
-
-		bus = DApplication.Connection.GetObject<Bus> (name, opath);
-
-		bus.NameAcquired += delegate (string acquired_name) {
-			Console.Error.WriteLine ("NameAcquired: " + acquired_name);
-		};
-
-		string myName = bus.Hello ();
-		Console.Error.WriteLine ("myName: " + myName);
-
-		ObjectPath myOpath = new ObjectPath ("/org/ndesk/test");
 		string myNameReq = "org.ndesk.gtest";
+		ObjectPath myPath = new ObjectPath ("/org/ndesk/btn");
 
 		if (bus.NameHasOwner (myNameReq)) {
-			rbtn = DApplication.Connection.GetObject<Button> (myNameReq, new ObjectPath ("/org/ndesk/btn"));
+			rbtn = DApplication.SessionConnection.GetObject<Button> (myNameReq, myPath);
 		} else {
 			NameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
 
 			Console.WriteLine ("nameReply: " + nameReply);
 
-			DApplication.Connection.Marshal (btn, myNameReq, new ObjectPath ("/org/ndesk/btn"));
+			DApplication.SessionConnection.Marshal (btn, myNameReq, myPath);
 			rbtn = btn;
 		}
 

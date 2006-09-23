@@ -42,14 +42,14 @@ public class TestGLib
 		string myNameReq = "org.ndesk.gtest";
 
 		if (bus.NameHasOwner (myNameReq)) {
-			demo = DApplication.Connection.GetObject<DemoObject> (myNameReq, myPath);
+			demo = DApplication.SessionConnection.GetObject<DemoObject> (myNameReq, myPath);
 		} else {
 			NameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
 
 			Console.WriteLine ("nameReply: " + nameReply);
 
 			demo = new DemoObject ();
-			DApplication.Connection.Marshal (demo, myNameReq, myPath);
+			DApplication.SessionConnection.Marshal (demo, myNameReq, myPath);
 		}
 
 		Application.Run ();

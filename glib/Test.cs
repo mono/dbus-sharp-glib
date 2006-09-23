@@ -43,19 +43,7 @@ public class TestGLib
 		win.Destroyed += delegate {Application.Quit ();};
 		win.ShowAll ();
 
-
-		ObjectPath opath = new ObjectPath ("/org/freedesktop/DBus");
-		string name = "org.freedesktop.DBus";
-
-		bus = DApplication.Connection.GetObject<Bus> (name, opath);
-
-		bus.NameAcquired += delegate (string acquired_name) {
-			Console.Error.WriteLine ("NameAcquired: " + acquired_name);
-		};
-
-		string myName = bus.Hello ();
-		Console.Error.WriteLine ("myName: " + myName);
-
+		bus = DApplication.SessionBus;
 
 		Application.Run ();
 	}
