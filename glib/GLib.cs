@@ -62,7 +62,7 @@ namespace NDesk.DBus
 		{
 			get {
 				if (systemBus == null) {
-					systemBus = SessionConnection.GetObject<Bus>("org.freedesktop.DBus", new ObjectPath("/org/freedesktop/DBus"));
+					systemBus = SystemConnection.GetObject<Bus>("org.freedesktop.DBus", new ObjectPath("/org/freedesktop/DBus"));
 					systemBus.Hello ();
 				}
 
