@@ -11,26 +11,62 @@ using org.freedesktop.DBus;
 
 namespace NDesk.DBus
 {
-	//FIXME: this API needs review and de-unixification
+	//FIXME: this API needs review and de-unixification. It is horrid, but gets the job done.
 	public static class DApplication
 	{
-		static bool Dispatch (IOChannel source, IOCondition condition, IntPtr data)
+		static bool SystemDispatch (IOChannel source, IOCondition condition, IntPtr data)
 		{
-			//Console.Error.WriteLine ("Dispatch " + source.UnixFd + " " + condition);
-			connection.Iterate ();
-			//Console.Error.WriteLine ("Dispatch done");
-
+			systemConnection.Iterate ();
 			return true;
 		}
 
-		static Connection connection = null;
+		static bool SessionDispatch (IOChannel source, IOCondition condition, IntPtr data)
+		{
+			sessionConnection.Iterate ();
+			return true;
+		}
+
+		[Obsolete ("Use DApplication.SessionConnection")]
 		public static Connection Connection
 		{
 			get {
-				if (connection == null)
-					Init ();
+				return SessionConnection;
+			}
+		}
 
-				return connection;
+		static Connection systemConnection = null;
+		public static Connection SystemConnection
+		{
+			get {
+				if (systemConnection == null)
+					systemConnection = Init (Address.SystemBus, SystemDispatch);
+
+				return systemConnection;
+			}
+		}
+
+		static Connection sessionConnection = null;
+		public static Connection SessionConnection
+		{
+			get {
+				if (sessionConnection == null)
+					sessionConnection = Init (Address.SessionBus, SessionDispatch);
+
+				return sessionConnection;
+			}
+		}
+
+		//this will need to change later, but is needed for now
+		static Bus systemBus = null;
+		public static Bus SystemBus
+		{
+			get {
+				if (systemBus == null) {
+					systemBus = SessionConnection.GetObject<Bus>("org.freedesktop.DBus", new ObjectPath("/org/freedesktop/DBus"));
+					systemBus.Hello ();
+				}
+
+				return systemBus;
 			}
 		}
 
@@ -40,7 +76,7 @@ namespace NDesk.DBus
 		{
 			get {
 				if (sessionBus == null) {
-					sessionBus = Connection.GetObject<Bus>("org.freedesktop.DBus", new ObjectPath("/org/freedesktop/DBus"));
+					sessionBus = SessionConnection.GetObject<Bus>("org.freedesktop.DBus", new ObjectPath("/org/freedesktop/DBus"));
 					sessionBus.Hello ();
 				}
 
@@ -49,12 +85,16 @@ namespace NDesk.DBus
 		}
 
 		//this is just temporary
-		private static void Init ()
+		private static Connection Init (string address, IOFunc dispatchHandler)
 		{
-			connection = new Connection ();
+			Connection conn = new Connection (false);
+			conn.Open (address);
+			conn.Authenticate ();
 
-			IOChannel channel = new IOChannel ((int)connection.SocketHandle);
-			IO.AddWatch (channel, IOCondition.In, Dispatch);
+			IOChannel channel = new IOChannel ((int)conn.SocketHandle);
+			IO.AddWatch (channel, IOCondition.In, dispatchHandler);
+
+			return conn;
 		}
 	}
 }
