@@ -23,6 +23,10 @@ test-export.exe: PKGS = gtk-sharp-2.0
 
 test-export.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll TestExport.cs
 
+test-system-bus.exe: PKGS = gtk-sharp-2.0
+
+test-system-bus.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll TestSystemBus.cs
+
 test-ui.exe: PKGS = gtk-sharp-2.0
 
 test-ui.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll TestUI.cs
@@ -44,6 +48,12 @@ test-export: test-export.exe
 	chmod +x $@
 
 test-ui: test-ui.exe
+	echo '#!/bin/sh' > $@
+	echo 'MONO_PATH=$(DBUS_SHARP_PREFIX)/src:$$MONO_PATH' >> $@
+	echo '$(RUNTIME) $^ $$@' >> $@
+	chmod +x $@
+
+test-system-bus: test-system-bus.exe
 	echo '#!/bin/sh' > $@
 	echo 'MONO_PATH=$(DBUS_SHARP_PREFIX)/src:$$MONO_PATH' >> $@
 	echo '$(RUNTIME) $^ $$@' >> $@
