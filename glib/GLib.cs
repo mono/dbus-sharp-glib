@@ -26,14 +26,6 @@ namespace NDesk.DBus
 			return true;
 		}
 
-		[Obsolete ("Use DApplication.SessionConnection")]
-		public static Connection Connection
-		{
-			get {
-				return SessionConnection;
-			}
-		}
-
 		static Connection systemConnection = null;
 		public static Connection SystemConnection
 		{
