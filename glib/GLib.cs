@@ -26,6 +26,11 @@ namespace NDesk.DBus
 			return true;
 		}
 
+		static void HandleNameAcquired (string name)
+		{
+			//do nothing
+		}
+
 		static Connection systemConnection = null;
 		public static Connection SystemConnection
 		{
@@ -56,6 +61,7 @@ namespace NDesk.DBus
 				if (systemBus == null) {
 					systemBus = SystemConnection.GetObject<Bus>("org.freedesktop.DBus", new ObjectPath("/org/freedesktop/DBus"));
 					systemBus.Hello ();
+					systemBus.NameAcquired += HandleNameAcquired;
 				}
 
 				return systemBus;
@@ -70,6 +76,7 @@ namespace NDesk.DBus
 				if (sessionBus == null) {
 					sessionBus = SessionConnection.GetObject<Bus>("org.freedesktop.DBus", new ObjectPath("/org/freedesktop/DBus"));
 					sessionBus.Hello ();
+					sessionBus.NameAcquired += HandleNameAcquired;
 				}
 
 				return sessionBus;
