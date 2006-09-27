@@ -52,7 +52,7 @@ public class TestGLib
 
 			Console.WriteLine ("nameReply: " + nameReply);
 
-			DApplication.SessionConnection.Marshal (btn, myNameReq, myPath);
+			DApplication.SessionConnection.Register (myNameReq, myPath, btn);
 			rbtn = btn;
 		}
 

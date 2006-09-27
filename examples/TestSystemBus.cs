@@ -39,7 +39,7 @@ public class TestGLib
 
 			demo = new DemoObject ();
 			sysBus.NameOwnerChanged += demo.FireChange;
-			DApplication.SessionConnection.Marshal (demo, myNameReq, myPath);
+			DApplication.SessionConnection.Register (myNameReq, myPath, demo);
 		}
 
 		Application.Run ();

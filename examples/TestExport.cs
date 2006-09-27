@@ -49,7 +49,7 @@ public class TestGLib
 			Console.WriteLine ("nameReply: " + nameReply);
 
 			demo = new DemoObject ();
-			DApplication.SessionConnection.Marshal (demo, myNameReq, myPath);
+			DApplication.SessionConnection.Register (myNameReq, myPath, demo);
 		}
 
 		Application.Run ();
