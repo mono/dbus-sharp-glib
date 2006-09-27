@@ -86,9 +86,7 @@ namespace NDesk.DBus
 		//this is just temporary
 		private static Connection Init (string address, IOFunc dispatchHandler)
 		{
-			Connection conn = new Connection (false);
-			conn.Open (address);
-			conn.Authenticate ();
+			Connection conn = Connection.Open (address);
 
 			IOChannel channel = new IOChannel ((int)conn.SocketHandle);
 			IO.AddWatch (channel, IOCondition.In, dispatchHandler);
