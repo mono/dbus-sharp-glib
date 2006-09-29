@@ -26,10 +26,16 @@ namespace NDesk.DBus
 			return true;
 		}
 
+		static bool initialized = false;
 		public static void Init ()
 		{
+			if (initialized)
+				return;
+
 			Init (Bus.System, SystemDispatch);
 			Init (Bus.Session, SessionDispatch);
+
+			initialized = true;
 		}
 
 		public static void Init (Connection conn, IOFunc dispatchHandler)
