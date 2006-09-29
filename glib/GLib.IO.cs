@@ -155,6 +155,22 @@ namespace NDesk.GLib
 
 			return g_io_add_watch_full (channel, priority, condition, func, IntPtr.Zero, notify);
 		}
+
+		[DllImport(GLIB)]
+			protected static extern IntPtr g_main_context_default ();
+
+		public static IntPtr MainContextDefault ()
+		{
+			return g_main_context_default ();
+		}
+
+		[DllImport(GLIB)]
+			protected static extern void g_main_context_wakeup (IntPtr context);
+
+		public static void MainContextWakeup (IntPtr context)
+		{
+			g_main_context_wakeup (context);
+		}
 	}
 
 	//From Mono.Unix and poll(2)
