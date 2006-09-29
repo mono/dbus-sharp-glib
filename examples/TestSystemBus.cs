@@ -25,8 +25,8 @@ public class TestGLib
 		win.Destroyed += delegate {Application.Quit ();};
 		win.ShowAll ();
 
-		bus = Bus.SessionBus;
-		sysBus = Bus.SystemBus.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
+		bus = Bus.Session;
+		sysBus = Bus.System.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
 
 		string myNameReq = "org.ndesk.gtest";
 		ObjectPath myPath = new ObjectPath ("/org/ndesk/test");
@@ -53,18 +53,18 @@ public class DemoObject : MarshalByRefObject
 	/*
 	public DemoObject ()
 	{
-		NameOwnerChangedOnSystemBus += delegate {};
-		DApplication.SystemBus.NameOwnerChanged += NameOwnerChangedOnSystemBus;
+		NameOwnerChangedOnSystem += delegate {};
+		DApplication.System.NameOwnerChanged += NameOwnerChangedOnSystem;
 	}
 	*/
 
 	//is it possible to do this without needing the following method?
 	public void FireChange (string name, string old_owner, string new_owner)
 	{
-		Console.WriteLine ("Asked to fire off signal NameOwnerChangedOnSystemBus");
-		if (NameOwnerChangedOnSystemBus != null)
-			NameOwnerChangedOnSystemBus (name, old_owner, new_owner);
+		Console.WriteLine ("Asked to fire off signal NameOwnerChangedOnSystem");
+		if (NameOwnerChangedOnSystem != null)
+			NameOwnerChangedOnSystem (name, old_owner, new_owner);
 	}
 
-	public event NameOwnerChangedHandler NameOwnerChangedOnSystemBus;
+	public event NameOwnerChangedHandler NameOwnerChangedOnSystem;
 }

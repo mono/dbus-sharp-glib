@@ -37,7 +37,7 @@ public class TestGLib
 		win.ShowAll ();
 
 
-		bus = Bus.SessionBus;
+		bus = Bus.Session;
 
 		string myNameReq = "org.ndesk.gtest";
 		ObjectPath myPath = new ObjectPath ("/org/ndesk/test");

@@ -16,20 +16,20 @@ namespace NDesk.DBus
 	{
 		static bool SystemDispatch (IOChannel source, IOCondition condition, IntPtr data)
 		{
-			Bus.SystemBus.Iterate ();
+			Bus.System.Iterate ();
 			return true;
 		}
 
 		static bool SessionDispatch (IOChannel source, IOCondition condition, IntPtr data)
 		{
-			Bus.SessionBus.Iterate ();
+			Bus.Session.Iterate ();
 			return true;
 		}
 
 		public static void Init ()
 		{
-			Init (Bus.SystemBus, SystemDispatch);
-			Init (Bus.SessionBus, SessionDispatch);
+			Init (Bus.System, SystemDispatch);
+			Init (Bus.Session, SessionDispatch);
 		}
 
 		public static void Init (Connection conn, IOFunc dispatchHandler)

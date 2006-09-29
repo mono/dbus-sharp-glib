@@ -41,7 +41,7 @@ public class TestGLib
 		win.Destroyed += delegate {Application.Quit ();};
 		win.ShowAll ();
 
-		bus = Bus.SessionBus;
+		bus = Bus.Session;
 
 		string myNameReq = "org.ndesk.gtest";
 		ObjectPath myPath = new ObjectPath ("/org/ndesk/btn");
