@@ -21,6 +21,7 @@ public class TestGLib
 
 	public static void Main ()
 	{
+		BusG.Init ();
 		Application.Init ();
 
 		Button btn = new Button ("Click me");
@@ -36,20 +37,20 @@ public class TestGLib
 		win.ShowAll ();
 
 
-		bus = DApplication.SessionBus;
+		bus = Bus.SessionBus;
 
-		ObjectPath myPath = new ObjectPath ("/org/ndesk/test");
 		string myNameReq = "org.ndesk.gtest";
+		ObjectPath myPath = new ObjectPath ("/org/ndesk/test");
 
 		if (bus.NameHasOwner (myNameReq)) {
-			demo = DApplication.SessionConnection.GetObject<DemoObject> (myNameReq, myPath);
+			demo = bus.GetObject<DemoObject> (myNameReq, myPath);
 		} else {
-			NameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
+			NameReply nameReply = bus.RequestName (myNameReq);
 
 			Console.WriteLine ("nameReply: " + nameReply);
 
 			demo = new DemoObject ();
-			DApplication.SessionConnection.Register (myNameReq, myPath, demo);
+			bus.Register (myNameReq, myPath, demo);
 		}
 
 		Application.Run ();

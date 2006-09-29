@@ -11,12 +11,13 @@ using org.freedesktop.DBus;
 public class TestGLib
 {
 	static Bus bus;
-	static Bus sysBus;
+	static IBus sysBus;
 
 	static DemoObject demo;
 
 	public static void Main ()
 	{
+		BusG.Init ();
 		Application.Init ();
 
 		Window win = new Window ("D-Bus#");
@@ -24,14 +25,14 @@ public class TestGLib
 		win.Destroyed += delegate {Application.Quit ();};
 		win.ShowAll ();
 
-		bus = DApplication.SessionBus;
-		sysBus = DApplication.SystemBus;
+		bus = Bus.SessionBus;
+		sysBus = Bus.SystemBus.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
 
 		string myNameReq = "org.ndesk.gtest";
 		ObjectPath myPath = new ObjectPath ("/org/ndesk/test");
 
 		if (bus.NameHasOwner (myNameReq)) {
-			demo = DApplication.SessionConnection.GetObject<DemoObject> (myNameReq, myPath);
+			demo = bus.GetObject<DemoObject> (myNameReq, myPath);
 		} else {
 			NameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
 
@@ -39,7 +40,7 @@ public class TestGLib
 
 			demo = new DemoObject ();
 			sysBus.NameOwnerChanged += demo.FireChange;
-			DApplication.SessionConnection.Register (myNameReq, myPath, demo);
+			bus.Register (myNameReq, myPath, demo);
 		}
 
 		Application.Run ();

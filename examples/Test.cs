@@ -20,10 +20,11 @@ public class TestGLib
 
 	static TextView tv;
 
-	static Bus bus;
+	static IBus bus;
 
 	public static void Main ()
 	{
+		BusG.Init ();
 		Application.Init ();
 
 		tv = new TextView ();
@@ -43,7 +44,7 @@ public class TestGLib
 		win.Destroyed += delegate {Application.Quit ();};
 		win.ShowAll ();
 
-		bus = DApplication.SessionBus;
+		bus = Bus.SessionBus.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
 
 		Application.Run ();
 	}
