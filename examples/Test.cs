@@ -18,6 +18,11 @@ public class TestGLib
 		}
 	}
 
+	public static void OnClickQuit (object o, EventArgs args)
+	{
+		Application.Quit ();
+	}
+
 	static TextView tv;
 
 	static IBus bus;
@@ -34,9 +39,13 @@ public class TestGLib
 		Button btn = new Button ("Click me");
 		btn.Clicked += OnClick;
 
+		Button btnq = new Button ("Quit");
+		btnq.Clicked += OnClickQuit;
+
 		VBox vb = new VBox (false, 2);
 		vb.PackStart (sw, true, true, 0);
 		vb.PackStart (btn, false, true, 0);
+		vb.PackStart (btnq, false, true, 0);
 
 		Window win = new Window ("D-Bus#");
 		win.SetDefaultSize (640, 480);
