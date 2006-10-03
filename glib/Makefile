@@ -10,7 +10,7 @@ VPATH=$(DBUS_SHARP_PREFIX)/src
 
 all: NDesk.DBus.GLib.dll
 
-NDesk.DBus.GLib.dll: PKGS = glib-sharp-2.0
+NDesk.DBus.GLib.dll:
 
 NDesk.DBus.GLib.dll: NDesk.DBus.dll AssemblyInfo.cs GLib.IO.cs GLib.cs
 
