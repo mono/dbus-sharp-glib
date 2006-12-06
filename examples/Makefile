@@ -25,6 +25,11 @@ test-ui.exe: PKGS = gtk-sharp-2.0
 
 test-ui.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll TestUI.cs
 
+test-threads.exe: PKGS = gtk-sharp-2.0
+
+test-threads.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll TestThreads.cs
+
+
 run:
 	echo '#!/bin/sh' > $@
 	echo 'export MONO_PATH=$(DBUS_SHARP_GLIB_PREFIX)/glib:$(DBUS_SHARP_PREFIX)/src:$$MONO_PATH' >> $@
