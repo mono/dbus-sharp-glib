@@ -34,7 +34,7 @@ public class TestGLib
 		if (bus.NameHasOwner (myNameReq)) {
 			demo = bus.GetObject<DemoObject> (myNameReq, myPath);
 		} else {
-			NameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
+			RequestNameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
 
 			Console.WriteLine ("nameReply: " + nameReply);
 
