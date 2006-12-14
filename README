@@ -1,4 +1,4 @@
-This code provides GLib integration for Managed DBus
+This code provides GLib main loop integration for Managed D-Bus
 
 See http://www.ndesk.org/DBusSharp
 
