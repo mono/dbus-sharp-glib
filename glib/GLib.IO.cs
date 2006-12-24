@@ -190,6 +190,7 @@ namespace NDesk.GLib
 	}
 
 	//A bitwise combination representing a condition to watch for on an event source.
+	[Flags]
 	public enum IOCondition : short
 	{
 		//There is data to read.
