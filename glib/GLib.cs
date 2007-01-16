@@ -37,7 +37,7 @@ namespace NDesk.DBus
 			Init (conn, dispatchHandler);
 		}
 
-		public static void Init (Connection conn, IOFunc dispatchHandler)
+		static void Init (Connection conn, IOFunc dispatchHandler)
 		{
 			IOChannel channel = new IOChannel ((int)conn.Transport.SocketHandle);
 			IO.AddWatch (channel, IOCondition.In, dispatchHandler);
