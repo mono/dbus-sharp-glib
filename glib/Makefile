@@ -16,6 +16,6 @@ NDesk.DBus.GLib.dll: NDesk.DBus.dll AssemblyInfo.cs GLib.IO.cs GLib.cs ../ndesk.
 
 .PHONY:
 install: NDesk.DBus.GLib.dll
-	$(GACUTIL) -i NDesk.DBus.GLib.dll -f -package ndesk-dbus-glib-1.0
+	$(GACUTIL) $(GACUTIL_FLAGS) -i NDesk.DBus.GLib.dll -f -package ndesk-dbus-glib-1.0
 
 include $(DBUS_SHARP_PREFIX)/include.mk
