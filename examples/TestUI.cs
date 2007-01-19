@@ -49,11 +49,11 @@ public class TestGLib
 		if (bus.NameHasOwner (myNameReq)) {
 			rbtn = bus.GetObject<Button> (myNameReq, myPath);
 		} else {
-			RequestNameReply nameReply = bus.RequestName (myNameReq);
-
-			Console.WriteLine ("nameReply: " + nameReply);
-
 			bus.Register (myNameReq, myPath, btn);
+
+			RequestNameReply nameReply = bus.RequestName (myNameReq);
+			Console.WriteLine ("RequestNameReply: " + nameReply);
+
 			rbtn = btn;
 		}
 

@@ -34,13 +34,12 @@ public class TestGLib
 		if (bus.NameHasOwner (myNameReq)) {
 			demo = bus.GetObject<DemoObject> (myNameReq, myPath);
 		} else {
-			RequestNameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
-
-			Console.WriteLine ("nameReply: " + nameReply);
-
 			demo = new DemoObject ();
 			sysBus.NameOwnerChanged += demo.FireChange;
 			bus.Register (myNameReq, myPath, demo);
+
+			RequestNameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
+			Console.WriteLine ("RequestNameReply: " + nameReply);
 		}
 
 		Application.Run ();
