@@ -10,8 +10,8 @@ VPATH=$(DBUS_SHARP_PREFIX)/src
 
 all: NDesk.DBus.GLib.dll
 
-NDesk.DBus.GLib.dll:
+NDesk.DBus.GLib.dll: CSFLAGS=-keyfile:../ndesk.snk
 
-NDesk.DBus.GLib.dll: NDesk.DBus.dll AssemblyInfo.cs GLib.IO.cs GLib.cs
+NDesk.DBus.GLib.dll: NDesk.DBus.dll AssemblyInfo.cs GLib.IO.cs GLib.cs ../ndesk.snk
 
 include $(DBUS_SHARP_PREFIX)/include.mk
