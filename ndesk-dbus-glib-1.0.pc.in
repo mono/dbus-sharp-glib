@@ -1,0 +1,9 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+
+Name: NDesk.DBus.GLib
+Description: GLib integration for NDesk.DBus, the D-Bus IPC library
+Version: 0.3.0
+Requires: ndesk-dbus
+Libs: -r:${libdir}/mono/lib/ndesk-dbus-glib-1.0/NDesk.DBus.GLib.dll
