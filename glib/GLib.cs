@@ -3,8 +3,6 @@
 // See COPYING for details
 
 using System;
-//using GLib;
-//using Gtk;
 using NDesk.DBus;
 using NDesk.GLib;
 using org.freedesktop.DBus;
