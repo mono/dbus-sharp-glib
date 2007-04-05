@@ -7,4 +7,4 @@ Description: GLib integration for NDesk.DBus, the D-Bus IPC library
 Version: 0.3.0
 URL: http://www.ndesk.org/DBusSharp
 Requires: ndesk-dbus-1.0
-Libs: -r:${libdir}/mono/lib/ndesk-dbus-glib-1.0/NDesk.DBus.GLib.dll
+Libs: -r:${libdir}/mono/ndesk-dbus-glib-1.0/NDesk.DBus.GLib.dll
