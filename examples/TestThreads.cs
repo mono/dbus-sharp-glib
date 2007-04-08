@@ -21,7 +21,9 @@ public class TestThreads
 
 	public static void Task ()
 	{
-		Console.WriteLine (bus.ListNames ());
+		for (int i = 0 ; i != 5000 ; i++)
+			foreach (string name in bus.ListNames ())
+				Console.WriteLine (name);
 	}
 
 	public static void OnClickQuit (object o, EventArgs args)
