@@ -2,7 +2,7 @@ DBUS_SHARP_PREFIX=../../dbus-sharp
 DBUS_SHARP_GLIB_PREFIX=..
 
 # See How Not to Use VPATH: http://make.paulandlesley.org/vpath.html
-VPATH=$(DBUS_SHARP_PREFIX)/src $(DBUS_SHARP_GLIB_PREFIX)/glib
+VPATH=$(DBUS_SHARP_PREFIX)/src $(DBUS_SHARP_GLIB_PREFIX)/src
 
 #Note that this makefile isn't healthy, but it works for me
 #Makefile bug: doesn't seem to work with make -B
@@ -32,7 +32,7 @@ test-threads.exe: NDesk.DBus.dll NDesk.DBus.GLib.dll TestThreads.cs
 
 run:
 	echo '#!/bin/sh' > $@
-	echo 'export MONO_PATH=$(DBUS_SHARP_GLIB_PREFIX)/glib:$(DBUS_SHARP_PREFIX)/src:$$MONO_PATH' >> $@
+	echo 'export MONO_PATH=$(DBUS_SHARP_GLIB_PREFIX)/src:$(DBUS_SHARP_PREFIX)/src:$$MONO_PATH' >> $@
 	echo '$(RUNTIME) $$@' >> $@
 	chmod +x $@
 

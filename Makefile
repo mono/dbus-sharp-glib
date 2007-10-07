@@ -1,2 +1,2 @@
 all:
-	$(MAKE) -C glib
+	$(MAKE) -C src
