@@ -44,7 +44,7 @@ public class TestGLib
 		if (bus.RequestName (bus_name) == RequestNameReply.PrimaryOwner) {
 			//create a new instance of the object to be exported
 			demo = new DemoObject ();
-			bus.Register (bus_name, path, demo);
+			bus.Register (path, demo);
 		} else {
 			//import a remote to a local proxy
 			demo = bus.GetObject<DemoObject> (bus_name, path);

@@ -47,7 +47,7 @@ public class TestGLib
 		ObjectPath path = new ObjectPath ("/org/ndesk/btn");
 
 		if (bus.RequestName (bus_name) == RequestNameReply.PrimaryOwner) {
-			bus.Register (bus_name, path, btn);
+			bus.Register (path, btn);
 			rbtn = btn;
 		} else {
 			rbtn = bus.GetObject<Button> (bus_name, path);
