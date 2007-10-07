@@ -43,20 +43,17 @@ public class TestGLib
 
 		bus = Bus.Session;
 
-		string myNameReq = "org.ndesk.gtest";
-		ObjectPath myPath = new ObjectPath ("/org/ndesk/btn");
+		string bus_name = "org.ndesk.gtest";
+		ObjectPath path = new ObjectPath ("/org/ndesk/btn");
 
-		if (bus.NameHasOwner (myNameReq)) {
-			rbtn = bus.GetObject<Button> (myNameReq, myPath);
-		} else {
-			bus.Register (myNameReq, myPath, btn);
-
-			RequestNameReply nameReply = bus.RequestName (myNameReq);
-			Console.WriteLine ("RequestNameReply: " + nameReply);
-
+		if (bus.RequestName (bus_name) == RequestNameReply.PrimaryOwner) {
+			bus.Register (bus_name, path, btn);
 			rbtn = btn;
+		} else {
+			rbtn = bus.GetObject<Button> (bus_name, path);
 		}
 
+		//run the main loop
 		Application.Run ();
 	}
 }

@@ -28,20 +28,20 @@ public class TestGLib
 		bus = Bus.Session;
 		sysBus = Bus.System.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
 
-		string myNameReq = "org.ndesk.gtest";
-		ObjectPath myPath = new ObjectPath ("/org/ndesk/test");
+		string bus_name = "org.ndesk.gtest";
+		ObjectPath path = new ObjectPath ("/org/ndesk/test");
 
-		if (bus.NameHasOwner (myNameReq)) {
-			demo = bus.GetObject<DemoObject> (myNameReq, myPath);
-		} else {
+		if (bus.RequestName (bus_name) == RequestNameReply.PrimaryOwner) {
+			//create a new instance of the object to be exported
 			demo = new DemoObject ();
 			sysBus.NameOwnerChanged += demo.FireChange;
-			bus.Register (myNameReq, myPath, demo);
-
-			RequestNameReply nameReply = bus.RequestName (myNameReq, NameFlag.None);
-			Console.WriteLine ("RequestNameReply: " + nameReply);
+			bus.Register (bus_name, path, demo);
+		} else {
+			//import a remote to a local proxy
+			demo = bus.GetObject<DemoObject> (bus_name, path);
 		}
 
+		//run the main loop
 		Application.Run ();
 	}
 }
