@@ -43,14 +43,12 @@ namespace NDesk.GLib
 		}
 
 		[DllImport(GLIB)]
-			//static extern int g_io_channel_unix_get_fd (IntPtr channel);
-			static extern int g_io_channel_unix_get_fd (IOChannel channel);
+			static extern int g_io_channel_unix_get_fd (IntPtr channel);
 
 		public int UnixFd
 		{
 			get {
-				//return g_io_channel_unix_get_fd (Handle);
-				return g_io_channel_unix_get_fd (this);
+				return g_io_channel_unix_get_fd (Handle);
 			}
 		}
 
@@ -65,43 +63,43 @@ namespace NDesk.GLib
 
 
 		[DllImport(GLIB)]
-			public static extern uint g_io_channel_get_buffer_size (IOChannel channel);
+			public static extern uint g_io_channel_get_buffer_size (IntPtr channel);
 
 		[DllImport(GLIB)]
-			public static extern void g_io_channel_set_buffer_size (IOChannel channel, uint size);
+			public static extern void g_io_channel_set_buffer_size (IntPtr channel, uint size);
 
 		public uint BufferSize
 		{
 			get {
-				return g_io_channel_get_buffer_size (this);
+				return g_io_channel_get_buffer_size (Handle);
 			} set {
-				g_io_channel_set_buffer_size (this, value);
+				g_io_channel_set_buffer_size (Handle, value);
 			}
 		}
 
 		[DllImport(GLIB)]
-			public static extern IOCondition g_io_channel_get_buffer_condition (IOChannel channel);
+			public static extern IOCondition g_io_channel_get_buffer_condition (IntPtr channel);
 
 		public IOCondition BufferCondition
 		{
 			get {
-				return g_io_channel_get_buffer_condition (this);
+				return g_io_channel_get_buffer_condition (Handle);
 			}
 		}
 
 		[DllImport(GLIB)]
-			public static extern IOFlags g_io_channel_get_flags (IOChannel channel);
+			public static extern IOFlags g_io_channel_get_flags (IntPtr channel);
 
 		[DllImport(GLIB)]
-			static extern short g_io_channel_set_flags (IOChannel channel, IOFlags flags, IntPtr error);
+			static extern short g_io_channel_set_flags (IntPtr channel, IOFlags flags, IntPtr error);
 
 		public IOFlags Flags
 		{
 			get {
-				return g_io_channel_get_flags (this);
+				return g_io_channel_get_flags (Handle);
 			} set {
 				//TODO: fix return and error
-				g_io_channel_set_flags (this, value, IntPtr.Zero);
+				g_io_channel_set_flags (Handle, value, IntPtr.Zero);
 			}
 		}
 	}
@@ -124,13 +122,13 @@ namespace NDesk.GLib
 		Returns: the event source id.
 		*/
 		[DllImport(GLIB)]
-			protected static extern uint g_io_add_watch (IOChannel channel, IOCondition condition, IOFunc func, IntPtr user_data);
+			protected static extern uint g_io_add_watch (IntPtr channel, IOCondition condition, IOFunc func, IntPtr user_data);
 
 		public static uint AddWatch (IOChannel channel, IOCondition condition, IOFunc func)
 		{
 			objs.Add (func);
 
-			return g_io_add_watch (channel, condition, func, IntPtr.Zero);
+			return g_io_add_watch (channel.Handle, condition, func, IntPtr.Zero);
 		}
 
 		/*
@@ -146,14 +144,14 @@ namespace NDesk.GLib
 		Returns: the event source id.
 		*/
 		[DllImport(GLIB)]
-			protected static extern uint g_io_add_watch_full (IOChannel channel, int priority, IOCondition condition, IOFunc func, IntPtr user_data, DestroyNotify notify);
+			protected static extern uint g_io_add_watch_full (IntPtr channel, int priority, IOCondition condition, IOFunc func, IntPtr user_data, DestroyNotify notify);
 
 		public static uint AddWatch (IOChannel channel, int priority, IOCondition condition, IOFunc func, DestroyNotify notify)
 		{
 			objs.Add (func);
 			objs.Add (notify);
 
-			return g_io_add_watch_full (channel, priority, condition, func, IntPtr.Zero, notify);
+			return g_io_add_watch_full (channel.Handle, priority, condition, func, IntPtr.Zero, notify);
 		}
 
 		[DllImport(GLIB)]
