@@ -26,8 +26,6 @@ namespace NDesk.GLib
 	*/
 	delegate bool IOFunc (IOChannel source, IOCondition condition, IntPtr data);
 
-	//this is actually somewhat like Stream, but we don't use it that way
-	[StructLayout (LayoutKind.Sequential)]
 	struct IOChannel
 	{
 		const string GLIB = "libglib-2.0-0.dll";
