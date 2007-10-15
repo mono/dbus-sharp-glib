@@ -24,7 +24,7 @@ namespace NDesk.GLib
 
 	Returns: the function should return FALSE if the event source should be removed.
 	*/
-	delegate bool IOFunc (IOChannel source, IOCondition condition, IntPtr data);
+	delegate bool IOFunc (IntPtr source, IOCondition condition, IntPtr data);
 
 	struct IOChannel
 	{

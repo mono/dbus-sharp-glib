@@ -27,7 +27,7 @@ namespace NDesk.DBus
 
 		public static void Init (Connection conn)
 		{
-			IOFunc dispatchHandler = delegate (IOChannel source, IOCondition condition, IntPtr data) {
+			IOFunc dispatchHandler = delegate (IntPtr source, IOCondition condition, IntPtr data) {
 				if ((condition & IOCondition.Hup) == IOCondition.Hup) {
 					if (Protocol.Verbose)
 						Console.Error.WriteLine ("Warning: Connection was probably hung up (" + condition + ")");
