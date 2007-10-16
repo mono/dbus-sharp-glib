@@ -29,8 +29,9 @@ uninstall-local:
         fi
 
 EXTRA_DIST = \
-	$(CSFILES)
-	$(srcdir)/AssemblyInfo.cs.in
+	$(CSFILES) \
+	$(srcdir)/AssemblyInfo.cs.in \
+	NDesk.DBus.GLib.dll.config
 
 CLEANFILES = \
 	$(TARGET) \
