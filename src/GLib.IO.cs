@@ -13,6 +13,7 @@ namespace NDesk.GLib
 
 	@data: the data element.
 	*/
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	delegate void DestroyNotify (IntPtr data);
 
 	/*
@@ -24,6 +25,7 @@ namespace NDesk.GLib
 
 	Returns: the function should return FALSE if the event source should be removed.
 	*/
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	delegate bool IOFunc (IntPtr source, IOCondition condition, IntPtr data);
 
 	struct IOChannel
