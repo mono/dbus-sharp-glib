@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDesk.DBus.GLib", "src\NDes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDesk.DBus", "..\dbus-sharp\src\NDesk.DBus.csproj", "{09A0200F-F3AF-4BD6-9EC4-E7D80D273E4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtkDemo", "examples\GtkDemo.csproj", "{BDCEADCA-1573-4CAC-9605-DCEDBE80C3A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,10 @@ Global
 		{09A0200F-F3AF-4BD6-9EC4-E7D80D273E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09A0200F-F3AF-4BD6-9EC4-E7D80D273E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09A0200F-F3AF-4BD6-9EC4-E7D80D273E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDCEADCA-1573-4CAC-9605-DCEDBE80C3A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDCEADCA-1573-4CAC-9605-DCEDBE80C3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDCEADCA-1573-4CAC-9605-DCEDBE80C3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDCEADCA-1573-4CAC-9605-DCEDBE80C3A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
