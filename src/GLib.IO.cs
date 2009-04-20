@@ -45,7 +45,7 @@ namespace NDesk.GLib
 				Handle = g_io_channel_unix_new (fd);
 			}
 
-			Buffered = false;
+			//Buffered = false;
 		}
 
 		[DllImport(GLIB)]
