@@ -42,8 +42,14 @@ namespace NDesk.GLib
 			try {
 				Handle = g_io_channel_win32_new_socket (fd);
 			} catch {
-				Handle = g_io_channel_unix_new (fd);
+				Handle = IntPtr.Zero;
 			}
+
+			if (Handle == IntPtr.Zero)
+				Handle = g_io_channel_unix_new (fd);
+
+			if (Handle == IntPtr.Zero)
+				throw new Exception ("Failed to create GLib IO channel for fd " + fd);
 
 			//Buffered = false;
 		}
