@@ -39,7 +39,13 @@ namespace NDesk.GLib
 
 		public IOChannel (int fd)
 		{
-			Handle = g_io_channel_unix_new (fd);
+			try {
+				Handle = g_io_channel_win32_new_socket (fd);
+			} catch {
+				Handle = g_io_channel_unix_new (fd);
+			}
+
+			Buffered = false;
 		}
 
 		[DllImport(GLIB)]
@@ -74,6 +80,24 @@ namespace NDesk.GLib
 				return g_io_channel_get_buffer_size (Handle);
 			} set {
 				g_io_channel_set_buffer_size (Handle, value);
+			}
+		}
+
+		[DllImport(GLIB)]
+		public static extern bool g_io_channel_get_buffered (IntPtr channel);
+
+		[DllImport(GLIB)]
+		public static extern void g_io_channel_set_buffered (IntPtr channel, bool value);
+
+		public bool Buffered
+		{
+			get
+			{
+				return g_io_channel_get_buffered (Handle);
+			}
+			set
+			{
+				g_io_channel_set_buffered (Handle, value);
 			}
 		}
 
