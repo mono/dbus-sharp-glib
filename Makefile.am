@@ -5,7 +5,7 @@ pkgconfig_DATA = dbus-sharp-glib-1.0.pc
 
 EXTRA_DIST = \
 	dbus-sharp-glib-1.0.pc.in \
-	ndesk.snk
+	dbus-sharp.snk
 
 DISTCLEANFILES = \
 	dbus-sharp-glib-1.0.pc

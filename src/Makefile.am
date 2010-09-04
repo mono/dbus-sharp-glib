@@ -2,7 +2,7 @@ ASSEMBLY = NDesk.DBus.GLib
 TARGET = $(ASSEMBLY).dll
 
 CSFLAGS = \
-	-debug -target:library -keyfile:../ndesk.snk
+	-debug -target:library -keyfile:../dbus-sharp.snk
 
 LIBFLAGS = \
 	$(NDESK_DBUS_LIBS)
