@@ -1,11 +1,11 @@
-ASSEMBLY = NDesk.DBus.GLib
+ASSEMBLY = dbus-sharp-glib
 TARGET = $(ASSEMBLY).dll
 
 CSFLAGS = \
 	-debug -target:library -keyfile:../dbus-sharp.snk
 
 LIBFLAGS = \
-	$(NDESK_DBUS_LIBS)
+	$(DBUS_SHARP_LIBS)
 
 CSFILES = \
 	$(srcdir)/GLib.cs \
@@ -25,13 +25,13 @@ install-data-local:
 uninstall-local:
 	@if test -n '$(TARGET)'; then                       \
           echo "$(GACUTIL) /u $(ASSEMBLY) /gacdir $(DESTDIR)$(libdir)";  \
-          $(GACUTIL) /u $(ASSEMBLY) /package $(PACKAGE)-$(API_VERSION) /gacdir $(libdir) /root $(DESTDIR)$(libdir) || exit 1;   \
+          $(GACUTIL) /u $(ASSEMBLY) /package $(PACKAGE)-$(API_VERSION) /gacdir $(libdir) /root $(DESTDIR)$(libdir) || exit 1; \
         fi
 
 EXTRA_DIST = \
 	$(CSFILES) \
 	$(srcdir)/AssemblyInfo.cs.in \
-	NDesk.DBus.GLib.dll.config
+	$(TARGET).config
 
 CLEANFILES = \
 	$(TARGET) \
