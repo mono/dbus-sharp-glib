@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyFileVersion("@VERSION@")]
 [assembly: AssemblyInformationalVersion("@VERSION@")]
 [assembly: AssemblyVersion("@API_VERSION@")]
-[assembly: AssemblyTitle ("NDesk.DBus.GLib")]
-[assembly: AssemblyDescription ("GLib integration for NDesk.DBus, the D-Bus IPC library")]
-[assembly: AssemblyCopyright ("Copyright (C) Alp Toker")]
-[assembly: AssemblyCompany ("NDesk")]
+[assembly: AssemblyTitle ("dbus-sharp-glib")]
+[assembly: AssemblyDescription ("GLib integration for Managed DBus, the D-Bus IPC library")]
+[assembly: AssemblyCopyright ("Copyright (C) Alp Toker and others")]
+
