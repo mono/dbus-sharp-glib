@@ -2,7 +2,7 @@ ASSEMBLY = dbus-sharp-glib
 TARGET = $(ASSEMBLY).dll
 
 CSFLAGS = \
-	-debug -target:library -keyfile:../dbus-sharp.snk
+	-debug -target:library -keyfile:$(top_srcdir)/dbus-sharp.snk
 
 LIBFLAGS = \
 	$(DBUS_SHARP_LIBS)
