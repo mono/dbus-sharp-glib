@@ -6,7 +6,7 @@ using System;
 //using ST = System.Threading;
 using System.Threading;
 using Gtk;
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 public class TestThreads

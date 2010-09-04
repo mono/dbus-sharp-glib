@@ -5,7 +5,7 @@
 using System;
 using GLib;
 using Gtk;
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 public class TestGLib

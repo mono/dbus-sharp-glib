@@ -5,7 +5,7 @@
 using System;
 using GLib;
 using Gtk;
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 //NOTE: this was made to work by making GLib.Object inherit from System.MarshalByRefObject
