@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+
+Name: Managed DBus GLib integration
+Description: GLib integration for dbus-sharp, the D-Bus IPC library
+Version: @VERSION@
+URL: http://mono.github.com/dbus-sharp/
+Requires: dbus-sharp-1.0
+Libs: -r:${libdir}/mono/@PACKAGE@-@API_VERSION@/DBus.GLib.dll

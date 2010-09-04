@@ -48,7 +48,7 @@ AC_SUBST(NDESK_DBUS_LIBS)
 
 AC_OUTPUT([
 Makefile
-ndesk-dbus-glib-1.0.pc
+dbus-sharp-glib-1.0.pc
 src/AssemblyInfo.cs
 src/Makefile
 examples/Makefile
