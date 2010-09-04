@@ -34,7 +34,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NDesk.DBus.GLib.dll.config" />
+    <None Include="dbus-sharp-glib.dll.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GLib.cs" />
