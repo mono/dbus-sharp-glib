@@ -3,11 +3,11 @@
 // See COPYING for details
 
 using System;
-using NDesk.DBus;
-using NDesk.GLib;
+using DBus;
+using DBus.GLib;
 using org.freedesktop.DBus;
 
-namespace NDesk.DBus
+namespace DBus
 {
 	//FIXME: this API needs review and de-unixification. It is horrid, but gets the job done.
 	public static class BusG
