@@ -7,4 +7,4 @@ Description: GLib integration for dbus-sharp, the D-Bus IPC library
 Version: @VERSION@
 URL: http://mono.github.com/dbus-sharp/
 Requires: dbus-sharp-1.0
-Libs: -r:${libdir}/mono/@PACKAGE@-@API_VERSION@/DBus.GLib.dll
+Libs: -r:${libdir}/mono/@PACKAGE@-@API_VERSION@/dbus-sharp-glib.dll
