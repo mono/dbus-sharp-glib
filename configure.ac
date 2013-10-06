@@ -1,18 +1,16 @@
-AC_INIT(src/GLib.cs)
+m4_define([api_version], [2.0])
+m4_define([lib_version], [0.6.0])
 
-AC_CANONICAL_SYSTEM
 AC_PREREQ(2.13)
 
-API_VERSION=1.0
-#VERSION=$API_VERSION.0
-VERSION=0.5.0
-
-AC_SUBST(API_VERSION)
-AC_SUBST(VERSION)
-
-AM_INIT_AUTOMAKE(dbus-sharp-glib, $VERSION)
+AC_INIT([dbus-sharp-glib], lib_version)
+AC_CONFIG_SRCDIR([src/GLib.cs])
+AM_INIT_AUTOMAKE
 
 AM_MAINTAINER_MODE
+
+AC_SUBST([API_VERSION], [api_version])
+AC_SUBST([VERSION], [lib_version])
 
 AC_PROG_INSTALL
 
@@ -38,7 +36,7 @@ fi
 AC_SUBST(GACUTIL)
 
 DBUS_SHARP_REQUIRED_VERSION=0.7
-PKG_CHECK_MODULES(DBUS_SHARP, dbus-sharp-1.0 >= $DBUS_SHARP_REQUIRED_VERSION)
+PKG_CHECK_MODULES(DBUS_SHARP, dbus-sharp-2.0 >= $DBUS_SHARP_REQUIRED_VERSION)
 AC_SUBST(DBUS_SHARP_LIBS)
 
 #GLIB_REQUIRED_VERSION=2.0
@@ -48,7 +46,7 @@ AC_SUBST(DBUS_SHARP_LIBS)
 
 AC_OUTPUT([
 Makefile
-dbus-sharp-glib-1.0.pc
+dbus-sharp-glib-2.0.pc
 src/AssemblyInfo.cs
 src/Makefile
 examples/Makefile
