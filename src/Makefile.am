@@ -14,7 +14,7 @@ CSFILES = \
 all: $(TARGET)
 
 $(TARGET): $(CSFILES) AssemblyInfo.cs
-	$(GMCS) -out:$@ $(CSFLAGS) $(LIBFLAGS) $^
+	$(MCS) -out:$@ $(CSFLAGS) $(LIBFLAGS) $^
 
 install-data-local:
 	@if test -n '$(TARGET)'; then                       \
